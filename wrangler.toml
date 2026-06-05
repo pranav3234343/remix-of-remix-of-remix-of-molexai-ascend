@@ -1,7 +1,10 @@
-name = "molexai"
-compatibility_date = "2025-01-01"
-compatibility_flags = ["nodejs_compat"]
-main = "dist/server/index.mjs"
-
-[assets]
-directory = "dist/client"
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "robotics",
+  "main": "./dist/server/server.js",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist/client"
+  }
+}
