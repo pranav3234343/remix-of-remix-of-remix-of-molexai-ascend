@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Products — MolexAI | TargetIQ, MolGen, ADMET Predict, BindSim</title>
+<meta name="description" content="Four AI-powered products covering target ID, molecule generation, ADMET prediction, and GPU-accelerated docking." />
+<meta name="author" content="MolexAI" />
+<meta property="og:title" content="Products — MolexAI | TargetIQ, MolGen, ADMET Predict, BindSim" />
+<meta property="og:description" content="Four AI-powered products covering target ID, molecule generation, ADMET prediction, and GPU-accelerated docking." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://molexai.app" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#020818" />
+<link rel="canonical" href="https://molexai.app" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MolexAI",
+  "url": "https://molexai.app",
+  "foundingDate": "2024",
+  "founder": {"@type":"Person","name":"Kunal Singh"},
+  "description": "AI-powered drug discovery platform powered by NVIDIA technology.",
+  "location": {"@type":"Place","name":"Patna, India"}
+}
+</script>
+<style>
+:root{
+  --bg:#020818;
+  --surface:#060f2a;
+  --surface-2:#08143a;
+  --primary:#00E5A0;
+  --secondary:#0066FF;
+  --highlight:#7DF9C8;
+  --text:#F0F8FF;
+  --text-muted:#7BA4C8;
+  --border:rgba(0,229,160,0.15);
+  --border-strong:rgba(0,229,160,0.35);
+  --glow:rgba(0,229,160,0.08);
+  --nvidia:#76b900;
+  --danger:#ff5a6e;
+  --display:"Orbitron", system-ui, sans-serif;
+  --body:"DM Sans", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.6;
+  cursor:none;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--primary);text-decoration:none}
+button{font-family:inherit;cursor:none;border:none;background:none;color:inherit}
+section{position:relative;padding:120px 0;overflow:hidden}
+.container{max-width:1280px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+
+/* ===== Animated gradient mesh background ===== */
+.mesh-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 50% at 15% 20%, rgba(0,229,160,0.10), transparent 60%),
+    radial-gradient(50% 40% at 85% 30%, rgba(0,102,255,0.10), transparent 60%),
+    radial-gradient(40% 50% at 50% 90%, rgba(125,249,200,0.06), transparent 60%);
+  animation:meshShift 20s ease-in-out infinite alternate;
+}
+@keyframes meshShift{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(20deg)}
+}
+
+/* ===== Custom Cursor ===== */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+  border-radius:50%;mix-blend-mode:screen;
+  transform:translate(-50%,-50%);
+}
+.cursor-dot{width:6px;height:6px;background:var(--primary);box-shadow:0 0 12px var(--primary)}
+.cursor-ring{width:36px;height:36px;border:1.5px solid var(--primary);transition:width .25s, height .25s, background .25s}
+.cursor-ring.hover{width:60px;height:60px;background:rgba(0,229,160,0.08)}
+@media(hover:none){.cursor-dot,.cursor-ring{display:none}body{cursor:auto}button,a{cursor:pointer}}
+
+/* ===== Nav ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  background:rgba(2,8,24,0.4);
+  border-bottom:1px solid transparent;
+  transition:background .3s, border-color .3s, box-shadow .3s, padding .3s;
+  padding:18px 0;
+}
+.nav.scrolled{background:rgba(2,8,24,0.85);border-bottom-color:var(--border);box-shadow:0 8px 30px rgba(0,0,0,0.5);padding:12px 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1400px;margin:0 auto;padding:0 32px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.08em;color:var(--text);text-shadow:0 0 18px rgba(0,229,160,0.6)}
+.brand svg{width:30px;height:30px;filter:drop-shadow(0 0 6px var(--primary))}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:var(--text-muted);font-size:14px;font-weight:500;letter-spacing:.02em;transition:color .2s;position:relative}
+.nav-links a:hover{color:var(--primary)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--primary);transition:width .3s;box-shadow:0 0 6px var(--primary)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:14px}
+.beta-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(0,229,160,0.1);border:1px solid var(--border-strong);font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--primary)}
+.beta-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--primary);box-shadow:0 0 10px var(--primary);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.4)}}
+.nvidia-badge{font-family:var(--mono);font-size:11px;color:var(--nvidia);letter-spacing:.1em;padding:6px 10px;border:1px solid rgba(118,185,0,0.4);border-radius:6px;background:rgba(118,185,0,0.06)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:.02em;transition:transform .2s, box-shadow .25s, background .2s}
+.btn-primary{background:var(--primary);color:#001a12;box-shadow:0 0 24px rgba(0,229,160,0.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(0,229,160,0.65)}
+.btn-ghost{border:1px solid var(--border-strong);color:var(--text)}
+.btn-ghost:hover{background:rgba(0,229,160,0.08);border-color:var(--primary)}
+.nav-toggle{display:none;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:6px}
+.nav-toggle span{width:18px;height:1.5px;background:var(--text);position:relative}
+.nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--text)}
+.nav-toggle span::before{top:-6px}.nav-toggle span::after{top:6px}
+
+/* ===== Hero ===== */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden}
+#particles, #helix-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
+#helix-canvas{left:auto;right:0;width:50%;height:100%}
+.hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:60px;align-items:center;position:relative;z-index:3}
+.eyebrow{display:inline-flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--primary);text-transform:uppercase;margin-bottom:28px}
+.eyebrow::before,.eyebrow::after{content:"";width:30px;height:1px;background:linear-gradient(90deg,transparent,var(--primary))}
+.eyebrow::after{background:linear-gradient(90deg,var(--primary),transparent)}
+h1.hero-title{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,76px);line-height:1.02;letter-spacing:-.01em;margin-bottom:24px}
+.glow-text{color:var(--primary);text-shadow:0 0 24px rgba(0,229,160,0.55),0 0 60px rgba(0,229,160,0.25)}
+.typewriter-line{font-size:20px;color:var(--text);margin-bottom:24px;min-height:32px}
+.typewriter-line .tw{color:var(--primary);border-right:2px solid var(--primary);padding-right:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{border-color:transparent}}
+.hero-desc{color:var(--text-muted);font-size:16px;max-width:560px;margin-bottom:36px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.trust-bar{display:flex;flex-wrap:wrap;gap:18px 26px;font-family:var(--mono);font-size:12px;color:var(--text-muted);letter-spacing:.02em}
+.trust-bar span{display:inline-flex;align-items:center;gap:8px}
+.scroll-ind{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.25em;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:5}
+.scroll-ind .arr{width:1px;height:32px;background:linear-gradient(180deg,var(--primary),transparent);position:relative;animation:scrollArr 2s ease-in-out infinite}
+@keyframes scrollArr{0%{opacity:0;transform:translateY(-8px)}50%{opacity:1}100%{opacity:0;transform:translateY(8px)}}
+
+/* ===== Stats ===== */
+.stats-section{padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(0,229,160,0.04),transparent)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat{padding:24px 32px;text-align:center;position:relative}
+.stat + .stat::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:1px;background:linear-gradient(180deg,transparent,var(--border-strong),transparent)}
+.stat-num{font-family:var(--display);font-weight:800;font-size:clamp(36px,5vw,56px);color:var(--primary);text-shadow:0 0 18px rgba(0,229,160,0.35);background:linear-gradient(180deg,var(--primary),var(--highlight));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-label{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--text-muted);text-transform:uppercase;margin-top:10px}
+
+/* ===== Headings ===== */
+.section-label{font-family:var(--mono);font-size:12px;letter-spacing:.35em;color:var(--primary);text-transform:uppercase;margin-bottom:18px;display:inline-block;padding:6px 14px;border:1px solid var(--border-strong);border-radius:999px;background:rgba(0,229,160,0.05)}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(32px,4.2vw,52px);line-height:1.1;letter-spacing:-.01em;margin-bottom:18px}
+.section-sub{color:var(--text-muted);font-size:18px;max-width:720px;margin-bottom:60px}
+.section-head{margin-bottom:60px}
+
+/* ===== Problem / Solution ===== */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:60px}
+.compare-card{padding:36px;border-radius:18px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.compare-card h3{font-family:var(--display);font-size:22px;margin-bottom:24px;letter-spacing:.02em}
+.compare-card ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.compare-card li{display:flex;gap:12px;color:var(--text);font-size:15px;line-height:1.55}
+.compare-card li::before{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.old-way{background:linear-gradient(180deg,rgba(255,90,110,0.08),rgba(255,90,110,0.02));border:1px solid rgba(255,90,110,0.25)}
+.old-way h3{color:#ff8e9e}
+.old-way li::before{content:"✕";background:rgba(255,90,110,0.15);color:#ff8e9e;border:1px solid rgba(255,90,110,0.4)}
+.new-way{background:linear-gradient(180deg,rgba(0,229,160,0.08),rgba(0,229,160,0.02));border:1px solid var(--border-strong);box-shadow:0 0 50px rgba(0,229,160,0.1) inset}
+.new-way h3{color:var(--primary)}
+.new-way li::before{content:"✓";background:rgba(0,229,160,0.18);color:var(--primary);border:1px solid var(--border-strong)}
+.parallax-banner{position:relative;border-radius:20px;overflow:hidden;height:340px;border:1px solid var(--border)}
+.parallax-banner img{width:100%;height:100%;object-fit:cover;transform:scale(1.1)}
+.parallax-banner .overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,8,24,0.95),rgba(2,8,24,0.5)),linear-gradient(0deg,rgba(0,229,160,0.15),transparent)}
+.parallax-banner .quote{position:absolute;inset:0;display:flex;align-items:center;padding:0 60px;font-family:var(--display);font-size:clamp(22px,2.8vw,34px);font-weight:600;max-width:780px;line-height:1.3}
+
+/* ===== Cards generic ===== */
+.glass{
+  background:linear-gradient(180deg, rgba(8,20,58,0.7), rgba(6,15,42,0.5));
+  border:1px solid var(--border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:18px;
+  transition:transform .35s, box-shadow .35s, border-color .35s;
+  position:relative;
+  overflow:hidden;
+}
+.glass::before{content:"";position:absolute;inset:0;border-radius:18px;background:linear-gradient(135deg,rgba(0,229,160,0.08),transparent 50%);opacity:0;transition:opacity .4s;pointer-events:none}
+.glass.tilt:hover{border-color:var(--border-strong);box-shadow:0 30px 80px rgba(0,229,160,0.15)}
+.glass.tilt:hover::before{opacity:1}
+
+/* ===== Products ===== */
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.product-card{padding:34px;min-height:280px}
+.product-icon{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,rgba(0,229,160,0.2),rgba(0,102,255,0.15));border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px;box-shadow:0 0 24px rgba(0,229,160,0.15)}
+.product-card h3{font-family:var(--display);font-size:24px;margin-bottom:8px;letter-spacing:.02em}
+.product-card .tagline{color:var(--primary);font-size:14px;margin-bottom:14px;font-family:var(--mono);letter-spacing:.04em}
+.product-card p{color:var(--text-muted);font-size:14.5px;margin-bottom:18px}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--text);padding:5px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(0,229,160,0.05);text-transform:uppercase}
+.tag.nv{color:var(--nvidia);border-color:rgba(118,185,0,0.4);background:rgba(118,185,0,0.06)}
+.learn-more{color:var(--primary);font-family:var(--mono);font-size:12px;letter-spacing:.1em;display:inline-flex;align-items:center;gap:6px;transition:gap .25s}
+.learn-more:hover{gap:12px}
+
+/* ===== NVIDIA section ===== */
+.nv-callout{padding:32px 36px;border-radius:16px;border:1px solid rgba(118,185,0,0.35);background:linear-gradient(135deg,rgba(118,185,0,0.10),rgba(118,185,0,0.02));margin-bottom:50px;display:flex;gap:20px;align-items:flex-start}
+.nv-callout .nv-tag{font-family:var(--mono);color:var(--nvidia);font-size:12px;letter-spacing:.2em;flex-shrink:0;padding-top:4px}
+.nv-callout p{color:var(--text);font-size:15.5px;line-height:1.6}
+.pipeline{display:grid;grid-auto-flow:column;gap:14px;overflow-x:auto;padding:24px 4px 30px;margin-bottom:50px;scrollbar-width:thin}
+.pipeline-node{min-width:200px;padding:20px 18px;border-radius:14px;border:1px solid var(--border-strong);background:linear-gradient(180deg,rgba(0,229,160,0.10),rgba(0,229,160,0.02));position:relative;text-align:center}
+.pipeline-node h4{font-family:var(--display);font-size:13.5px;color:var(--primary);margin-bottom:8px;letter-spacing:.04em}
+.pipeline-node p{font-family:var(--mono);font-size:10.5px;color:var(--text-muted);line-height:1.5}
+.pipeline-arrow{display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:20px;position:relative}
+.pipeline-arrow::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--primary),transparent);opacity:.4;animation:flow 2.5s linear infinite}
+@keyframes flow{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.nv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:50px}
+.nv-card{padding:28px}
+.nv-card h4{font-family:var(--display);font-size:17px;margin-bottom:12px;color:var(--text)}
+.nv-card .nv-label{font-family:var(--mono);font-size:10.5px;color:var(--nvidia);letter-spacing:.18em;margin-bottom:10px;display:block;text-transform:uppercase}
+.nv-card p{color:var(--text-muted);font-size:14px}
+.inception-box{padding:36px;border-radius:18px;background:linear-gradient(135deg,rgba(118,185,0,0.12),rgba(0,229,160,0.06));border:1px solid rgba(118,185,0,0.45);text-align:center;position:relative;overflow:hidden}
+.inception-box::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(118,185,0,0.2),transparent 60%);pointer-events:none}
+.inception-box h3{font-family:var(--display);color:var(--nvidia);margin-bottom:12px;font-size:22px}
+.inception-box p{color:var(--text);max-width:740px;margin:0 auto 22px}
+
+/* ===== Market ===== */
+.market-section{background:linear-gradient(180deg,rgba(0,102,255,0.04),transparent)}
+.market-bg{position:absolute;inset:0;z-index:0}
+.market-bg img{width:100%;height:100%;object-fit:cover;opacity:.12}
+.market-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,rgba(2,8,24,0.5) 50%,var(--bg) 100%)}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:60px}
+.metric-card{padding:36px;text-align:left}
+.metric-card .big{font-family:var(--display);font-size:clamp(34px,4.5vw,52px);color:var(--primary);font-weight:800;margin-bottom:14px;line-height:1}
+.metric-card p{color:var(--text-muted);font-size:14.5px}
+.tam-row{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-bottom:60px}
+.tam-col{padding:24px 28px;border-radius:14px;border:1px solid var(--border);background:rgba(6,15,42,0.5)}
+.tam-col .tag-mini{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--primary);margin-bottom:8px}
+.tam-col .tam-val{font-family:var(--display);font-size:30px;font-weight:700;margin-bottom:14px}
+.tam-col p{color:var(--text-muted);font-size:13px;margin-bottom:14px}
+.bar{height:8px;border-radius:999px;background:rgba(0,229,160,0.1);overflow:hidden}
+.bar > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--highlight));box-shadow:0 0 12px var(--primary);transition:width 1.8s cubic-bezier(.2,.7,.2,1)}
+.quote-block{text-align:center;font-family:var(--display);font-style:italic;font-size:clamp(20px,2.6vw,28px);max-width:900px;margin:0 auto;line-height:1.4;color:var(--text);padding:40px 20px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.quote-block cite{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--text-muted);font-style:normal}
+
+/* ===== Use cases ===== */
+.usecase{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:60px}
+.usecase.reverse{direction:rtl}
+.usecase.reverse > *{direction:ltr}
+.usecase-img{border-radius:18px;overflow:hidden;border:1px solid var(--border);position:relative;height:340px;box-shadow:0 30px 60px rgba(0,0,0,0.5)}
+.usecase-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+.usecase:hover .usecase-img img{transform:scale(1.05)}
+.usecase-img::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,160,0.18),transparent 50%);mix-blend-mode:screen}
+.usecase h3{font-family:var(--display);font-size:24px;margin-bottom:16px}
+.usecase .label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;color:var(--primary);margin-bottom:10px;text-transform:uppercase}
+.usecase p{color:var(--text-muted);margin-bottom:14px;font-size:15px}
+.usecase p strong{color:var(--text)}
+.result-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(0,229,160,0.12);border:1px solid var(--border-strong);color:var(--primary);font-family:var(--mono);font-size:12px;letter-spacing:.1em;margin-top:6px}
+
+/* ===== About ===== */
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;align-items:center;margin-bottom:60px}
+.about-img{border-radius:20px;overflow:hidden;height:480px;position:relative;border:1px solid var(--border-strong)}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about-img::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,160,0.35),rgba(0,102,255,0.2))}
+.about-img .watermark{position:absolute;bottom:24px;left:24px;font-family:var(--display);font-size:30px;color:var(--text);letter-spacing:.1em;text-shadow:0 0 14px rgba(0,0,0,0.6);z-index:2}
+.about-text p{color:var(--text-muted);font-size:15.5px;margin-bottom:18px}
+.mission-box{padding:24px 28px;border:1px solid var(--border-strong);border-radius:14px;background:linear-gradient(135deg,rgba(0,229,160,0.10),transparent);box-shadow:0 0 40px rgba(0,229,160,0.12);font-family:var(--display);font-size:18px;color:var(--text);margin:30px 0 50px;text-align:center;letter-spacing:.01em}
+.values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.value{padding:24px;border-radius:14px;border:1px solid var(--border);background:rgba(6,15,42,0.5)}
+.value-icon{font-size:24px;margin-bottom:10px}
+.value h4{font-family:var(--display);font-size:16px;color:var(--primary);margin-bottom:6px}
+.value p{color:var(--text-muted);font-size:14px}
+
+/* ===== Team ===== */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.team-card{padding:28px;text-align:center}
+.avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:32px;font-weight:700;color:#000;box-shadow:0 0 30px rgba(0,229,160,0.25)}
+.av-1{background:linear-gradient(135deg,var(--primary),var(--secondary))}
+.av-2{background:linear-gradient(135deg,#4d8cff,#a366ff)}
+.av-3{background:linear-gradient(135deg,var(--primary),#7df9c8)}
+.av-4{background:linear-gradient(135deg,#a366ff,#ff66c4)}
+.team-card h3{font-family:var(--display);font-size:17px;margin-bottom:4px}
+.team-card .title{font-family:var(--mono);font-size:11px;color:var(--primary);letter-spacing:.15em;margin-bottom:14px;text-transform:uppercase}
+.team-card .bio{font-size:13.5px;color:var(--text-muted);margin-bottom:14px;text-align:left}
+.team-card .tag-row{justify-content:center}
+.linkedin{display:inline-flex;width:32px;height:32px;border-radius:8px;border:1px solid var(--border);align-items:center;justify-content:center;margin-top:12px;color:var(--primary);transition:background .2s}
+.linkedin:hover{background:rgba(0,229,160,0.1)}
+
+/* ===== Timeline ===== */
+.timeline{position:relative;max-width:880px;margin:0 auto;padding:20px 0}
+.timeline::before{content:"";position:absolute;left:24px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--primary),rgba(0,229,160,0.15) 70%,transparent)}
+.tl-item{position:relative;padding:0 0 38px 70px;opacity:.35;transition:opacity .6s}
+.tl-item.active{opacity:1}
+.tl-item .dot{position:absolute;left:14px;top:6px;width:22px;height:22px;border-radius:50%;background:#0a1840;border:2px solid var(--border-strong);transition:all .5s}
+.tl-item.active .dot{background:var(--primary);border-color:var(--primary);box-shadow:0 0 20px var(--primary),0 0 40px rgba(0,229,160,0.4)}
+.tl-item.future .dot{border-style:dashed}
+.tl-item.highlight.active .dot{background:var(--nvidia);border-color:var(--nvidia);box-shadow:0 0 20px var(--nvidia),0 0 50px rgba(118,185,0,0.6);animation:pulseNV 2s ease-in-out infinite}
+@keyframes pulseNV{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.tl-item .date{font-family:var(--mono);font-size:11.5px;color:var(--primary);letter-spacing:.2em;margin-bottom:4px;text-transform:uppercase}
+.tl-item.highlight .date{color:var(--nvidia)}
+.tl-item h3{font-family:var(--display);font-size:18px;margin-bottom:8px;letter-spacing:.02em}
+.tl-item p{color:var(--text-muted);font-size:14.5px}
+.status-pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.15em;padding:3px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;text-transform:uppercase}
+.status-pill.done{background:rgba(0,229,160,0.15);color:var(--primary);border:1px solid var(--border-strong)}
+.status-pill.up{background:rgba(118,185,0,0.15);color:var(--nvidia);border:1px solid rgba(118,185,0,0.4)}
+.status-pill.fut{background:rgba(123,164,200,0.1);color:var(--text-muted);border:1px solid rgba(123,164,200,0.3)}
+
+/* ===== Demo Form ===== */
+.demo-section{position:relative;overflow:hidden}
+.demo-section::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1100px;height:1100px;background:radial-gradient(circle,rgba(0,229,160,0.18),transparent 65%);pointer-events:none}
+.demo-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center;position:relative;z-index:2}
+.demo-benefits{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.demo-benefits div{display:flex;gap:12px;align-items:flex-start;color:var(--text);font-size:15px}
+.demo-benefits div::before{content:"✓";color:var(--primary);font-weight:700;width:24px;height:24px;border-radius:50%;background:rgba(0,229,160,0.15);border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}
+.form-card{padding:36px;border-radius:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.field{display:flex;flex-direction:column;margin-bottom:14px}
+.field label{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase}
+.field input,.field select,.field textarea{
+  padding:12px 14px;border-radius:8px;border:1px solid var(--border);
+  background:rgba(2,8,24,0.7);color:var(--text);font-family:inherit;font-size:14.5px;
+  transition:border-color .2s, box-shadow .2s;cursor:none;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,229,160,0.15)}
+.field textarea{resize:vertical;min-height:80px;font-family:inherit}
+.check{display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:13px;margin:8px 0 18px}
+.check input{width:16px;height:16px;accent-color:var(--primary)}
+.submit-btn{width:100%;padding:16px;font-family:var(--display);font-size:14px;letter-spacing:.1em;background:var(--primary);color:#001a12;border-radius:10px;font-weight:700;position:relative;overflow:hidden;text-transform:uppercase}
+.submit-btn::after{content:"";position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 3s infinite}
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+.form-foot{margin-top:18px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text-muted);letter-spacing:.08em}
+.form-foot div{margin-top:6px}
+
+/* ===== Footer ===== */
+footer{padding:80px 0 30px;border-top:1px solid var(--border);background:linear-gradient(180deg,transparent,rgba(0,229,160,0.04));position:relative}
+footer::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);box-shadow:0 0 18px var(--primary)}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:50px;flex-wrap:wrap}
+.footer-top p{color:var(--text-muted);font-size:14px;margin-top:8px}
+.footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:50px}
+.footer-col h5{font-family:var(--display);font-size:13px;letter-spacing:.15em;color:var(--primary);margin-bottom:18px;text-transform:uppercase}
+.footer-col a{display:block;color:var(--text-muted);font-size:14px;margin-bottom:10px;transition:color .2s}
+.footer-col a:hover{color:var(--primary)}
+.nv-strip{padding:24px 28px;border-radius:14px;border:1px solid rgba(118,185,0,0.35);background:rgba(118,185,0,0.05);text-align:center;margin-bottom:30px}
+.nv-strip strong{font-family:var(--display);color:var(--nvidia);font-size:15px;letter-spacing:.1em;display:block;margin-bottom:8px}
+.nv-strip p{font-family:var(--mono);font-size:12px;color:var(--text-muted);letter-spacing:.05em;line-height:1.7}
+.footer-bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-top:24px;border-top:1px solid var(--border);gap:20px;font-family:var(--mono);font-size:12px;color:var(--text-muted);letter-spacing:.05em}
+.footer-bottom .center{text-align:center}
+.footer-bottom .right{display:flex;justify-content:flex-end;gap:14px}
+.social{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .25s}
+.social:hover{color:var(--primary);border-color:var(--primary);box-shadow:0 0 16px rgba(0,229,160,0.3)}
+
+/* ===== Reveal anim ===== */
+.reveal{opacity:0;transform:translateY(30px) scale(.98);transition:opacity .9s ease, transform .9s ease}
+.reveal.in{opacity:1;transform:translateY(0) scale(1)}
+
+/* ===== Responsive ===== */
+@media (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr}
+  #helix-canvas{width:100%;opacity:.35;position:absolute;z-index:0}
+  .products-grid,.compare-grid,.about-grid,.demo-grid,.metric-grid,.usecase{grid-template-columns:1fr;direction:ltr}
+  .stats-row,.nv-grid,.team-grid,.tam-row,.footer-cols{grid-template-columns:repeat(2,1fr)}
+  .stat + .stat::before{display:none}
+  .nav-links{display:none}
+  .nav-toggle{display:inline-flex}
+  .nav-right .nvidia-badge,.nav-right .beta-pill{display:none}
+}
+@media (max-width:600px){
+  section{padding:80px 0}
+  .container{padding:0 20px}
+  .stats-row,.team-grid,.footer-cols,.values-grid,.tam-row{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-bottom{grid-template-columns:1fr;text-align:center}
+  .footer-bottom .right{justify-content:center}
+  .parallax-banner .quote{padding:0 24px;font-size:20px}
+  h1.hero-title{font-size:40px}
+  .nv-callout{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<style>.nav-links a.active{color:var(--primary)}.nav-links a.active::after{width:100%!important}</style>
+</head>
+<body>
+<div class="mesh-bg"></div>
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="MolexAI home">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 4 C 14 10, 18 22, 26 28" stroke="#00E5A0" stroke-width="2" stroke-linecap="round"/>
+        <path d="M26 4 C 18 10, 14 22, 6 28" stroke="#7DF9C8" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="10" cy="8" r="1.8" fill="#00E5A0"/><circle cx="22" cy="8" r="1.8" fill="#00E5A0"/>
+        <circle cx="14" cy="16" r="1.8" fill="#00E5A0"/><circle cx="18" cy="16" r="1.8" fill="#00E5A0"/>
+        <circle cx="10" cy="24" r="1.8" fill="#00E5A0"/><circle cx="22" cy="24" r="1.8" fill="#00E5A0"/>
+      </svg>
+      MolexAI
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="technology.html">Technology</a>
+      <a href="pipeline.html">Use Cases</a>
+      <a href="market.html">Market</a>
+      <a href="about.html">About</a>
+      <a href="team.html">Team</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <span class="beta-pill"><span class="dot"></span>BETA</span>
+      <span class="nvidia-badge">⚡ POWERED BY NVIDIA</span>
+      <a href="contact.html" class="btn btn-primary">Request Demo</a>
+      <button class="nav-toggle" id="navToggle" aria-label="menu" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</nav>
+<main style="padding-top:80px">
+<!-- ===== PRODUCTS ===== -->
+<section id="products">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Our Platform</span>
+      <h2>Four AI-powered products.<br/>One unified pipeline.</h2>
+      <p class="section-sub">From disease target to clinical candidate — MolexAI handles every step with AI and NVIDIA-accelerated computing.</p>
+    </div>
+    <div class="products-grid">
+      <article class="glass tilt product-card reveal">
+        <div class="product-icon">🎯</div>
+        <h3>TargetIQ</h3>
+        <div class="tagline">Find the right target, every time</div>
+        <p>AI-powered disease target identification from genomic and proteomic data. Ranks 40,000+ targets by druggability, novelty, and clinical translatability in under 2 hours.</p>
+        <div class="tag-row"><span class="tag nv">NVIDIA BioNeMo</span><span class="tag">Graph Neural Networks</span><span class="tag">Beta</span></div>
+        <a class="learn-more" href="contact.html">Learn more →</a>
+      </article>
+      <article class="glass tilt product-card reveal">
+        <div class="product-icon">🧬</div>
+        <h3>MolGen</h3>
+        <div class="tagline">Generate molecules that actually work</div>
+        <p>Generative AI molecule design using 3D structure-aware diffusion models trained on 2 billion known compounds. Designs novel candidates optimized for binding affinity, selectivity, and synthesizability.</p>
+        <div class="tag-row"><span class="tag nv">NVIDIA BioNeMo</span><span class="tag">Diffusion Models</span><span class="tag">Beta</span></div>
+        <a class="learn-more" href="contact.html">Learn more →</a>
+      </article>
+      <article class="glass tilt product-card reveal">
+        <div class="product-icon">🧪</div>
+        <h3>ADMET Predict</h3>
+        <div class="tagline">Know before you synthesize</div>
+        <p>Predict absorption, distribution, metabolism, excretion, and toxicity of any molecule before a single wet lab experiment. Eliminates the most common cause of late-stage drug failure.</p>
+        <div class="tag-row"><span class="tag">Deep Learning</span><span class="tag nv">NVIDIA GPU</span><span class="tag">Beta</span></div>
+        <a class="learn-more" href="contact.html">Learn more →</a>
+      </article>
+      <article class="glass tilt product-card reveal">
+        <div class="product-icon">⚛️</div>
+        <h3>BindSim</h3>
+        <div class="tagline">Simulate binding at GPU speed</div>
+        <p>GPU-accelerated molecular docking and binding affinity simulation running on NVIDIA H100 clusters. Screens 1 million binding poses per hour — tasks that took weeks now take minutes.</p>
+        <div class="tag-row"><span class="tag nv">NVIDIA H100</span><span class="tag">Molecular Dynamics</span><span class="tag">Coming Soon</span></div>
+        <a class="learn-more" href="contact.html">Learn more →</a>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="index.html" class="brand">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M6 4 C 14 10, 18 22, 26 28" stroke="#00E5A0" stroke-width="2" stroke-linecap="round"/><path d="M26 4 C 18 10, 14 22, 6 28" stroke="#7DF9C8" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="16" r="1.8" fill="#00E5A0"/><circle cx="18" cy="16" r="1.8" fill="#00E5A0"/></svg>
+          MolexAI
+        </a>
+        <p>From sequence to cure — at the speed of AI.</p>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><h5>Platform</h5><a href="products.html">TargetIQ</a><a href="products.html">MolGen</a><a href="products.html">ADMET Predict</a><a href="products.html">BindSim</a><a href="pricing.html">Pricing</a></div>
+      <div class="footer-col"><h5>Technology</h5><a href="technology.html">NVIDIA BioNeMo</a><a href="technology.html">AlphaFold 3</a><a href="technology.html">GPU Infrastructure</a><a href="technology.html">Federated Learning</a><a href="api-docs.html">API Docs</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="about.html">About</a><a href="team.html">Team</a><a href="roadmap.html">Roadmap</a><a href="blog.html">Blog</a><a href="careers.html">Careers</a><a href="press.html">Press</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="cookies.html">Cookie Policy</a><a href="data-processing.html">Data Processing</a></div>
+    </div>
+    <div class="nv-strip">
+      <strong>BUILT WITH NVIDIA TECHNOLOGY</strong>
+      <p>NVIDIA BioNeMo · NVIDIA GPU Computing · NVIDIA NIM Microservices<br/>NVIDIA Inception Program Application — June 2026</p>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 MolexAI Inc. All rights reserved.</div>
+      <div class="right">
+        <a href="contact.html" class="social" aria-label="LinkedIn">in</a>
+        <a href="contact.html" class="social" aria-label="Twitter">𝕏</a>
+        <a href="technology.html" class="social" aria-label="GitHub">⌥</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ===== Custom Cursor ===== */
+(function(){
+  const dot=document.getElementById('cDot'), ring=document.getElementById('cRing');
+  let mx=0,my=0,rx=0,ry=0;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+  function loop(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(loop)}
+  loop();
+  document.querySelectorAll('a,button,input,select,textarea,.tilt').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+  });
+})();
+
+/* ===== Nav scroll ===== */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>40)});
+
+/* ===== Typewriter ===== */
+(function(){
+  const el=document.getElementById('tw');
+  if(!el) return;
+  const phrases=['drug candidates in weeks, not years','protein structures in hours, not months','cancer targets with 94% accuracy'];
+  let p=0,i=0,del=false;
+  function tick(){
+    const cur=phrases[p];
+    el.textContent=cur.substring(0,i);
+    if(!del&&i<cur.length){i++;setTimeout(tick,55)}
+    else if(!del){del=true;setTimeout(tick,2200)}
+    else if(del&&i>0){i--;setTimeout(tick,25)}
+    else{del=false;p=(p+1)%phrases.length;setTimeout(tick,300)}
+  }
+  tick();
+})();
+
+/* ===== Counter ===== */
+function animateCount(el){
+  const target=parseFloat(el.dataset.count), suf=el.dataset.suffix||'';
+  const start=performance.now(), dur=1700;
+  function step(t){
+    const p=Math.min((t-start)/dur,1), e=1-Math.pow(1-p,3);
+    const v=target*e;
+    el.textContent=(target%1===0?Math.floor(v):v.toFixed(1))+suf;
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ===== Intersection Observer reveal + counters + bars + timeline ===== */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      en.target.classList.add('in','active');
+      if(en.target.dataset.count) animateCount(en.target);
+      if(en.target.dataset.bar) en.target.style.width=en.target.dataset.bar+'%';
+      io.unobserve(en.target);
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.reveal,[data-count],[data-bar]').forEach(el=>io.observe(el));
+
+/* Timeline staggered */
+const tlIO=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('active'); tlIO.unobserve(en.target);} });
+},{threshold:0.4});
+document.querySelectorAll('.tl-item').forEach(el=>tlIO.observe(el));
+
+/* ===== 3D card tilt ===== */
+document.querySelectorAll('.tilt').forEach(card=>{
+  card.style.transformStyle='preserve-3d';
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-0.5;
+    const y=(e.clientY-r.top)/r.height-0.5;
+    card.style.transform=`perspective(900px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave',()=>{card.style.transform=''});
+});
+
+/* ===== Particle Network ===== */
+(function(){
+  const c=document.getElementById('particles');
+  if(!c) return;
+  const ctx=c.getContext('2d');
+  let w,h,parts=[];
+  function resize(){w=c.width=c.offsetWidth*devicePixelRatio;h=c.height=c.offsetHeight*devicePixelRatio;ctx.scale(1,1);}
+  function init(){parts=[];const n=Math.min(80,Math.floor(w*h/30000));for(let i=0;i<n;i++)parts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.6+0.6})}
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    parts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(0,229,160,0.7)';ctx.fill();
+    });
+    for(let i=0;i<parts.length;i++)for(let j=i+1;j<parts.length;j++){
+      const dx=parts[i].x-parts[j].x, dy=parts[i].y-parts[j].y, d=Math.hypot(dx,dy);
+      if(d<140){ctx.strokeStyle=`rgba(0,229,160,${0.18*(1-d/140)})`;ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(parts[i].x,parts[i].y);ctx.lineTo(parts[j].x,parts[j].y);ctx.stroke();}
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();init()});
+  resize();init();draw();
+})();
+
+/* ===== Three.js DNA Helix ===== */
+(function(){
+  if(typeof THREE==='undefined') return;
+  const canvas=document.getElementById('helix-canvas');
+  if(!canvas) return;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  function size(){renderer.setSize(canvas.offsetWidth,canvas.offsetHeight,false)}
+  size();
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(45,canvas.offsetWidth/canvas.offsetHeight,0.1,1000);
+  camera.position.z=24;
+  const group=new THREE.Group();scene.add(group);
+  const teal=new THREE.Color(0x00E5A0), high=new THREE.Color(0x7DF9C8);
+  const mat1=new THREE.MeshBasicMaterial({color:teal});
+  const mat2=new THREE.MeshBasicMaterial({color:high});
+  const lineMat=new THREE.LineBasicMaterial({color:0x00E5A0,transparent:true,opacity:0.35});
+  const N=46, rad=3, hgt=20;
+  for(let i=0;i<N;i++){
+    const t=i/N, a=t*Math.PI*6, y=(t-0.5)*hgt;
+    const x1=Math.cos(a)*rad, z1=Math.sin(a)*rad;
+    const x2=Math.cos(a+Math.PI)*rad, z2=Math.sin(a+Math.PI)*rad;
+    const s1=new THREE.Mesh(new THREE.SphereGeometry(0.22,12,12),mat1);
+    const s2=new THREE.Mesh(new THREE.SphereGeometry(0.22,12,12),mat2);
+    s1.position.set(x1,y,z1);s2.position.set(x2,y,z2);
+    group.add(s1);group.add(s2);
+    if(i%2===0){
+      const g=new THREE.BufferGeometry().setFromPoints([s1.position,s2.position]);
+      group.add(new THREE.Line(g,lineMat));
+    }
+  }
+  let mx=0,my=0;
+  window.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-0.5);my=(e.clientY/innerHeight-0.5)});
+  window.addEventListener('resize',()=>{size();camera.aspect=canvas.offsetWidth/canvas.offsetHeight;camera.updateProjectionMatrix()});
+  function loop(){
+    group.rotation.y+=0.005;
+    group.rotation.x+= (my*0.4 - group.rotation.x)*0.05;
+    group.rotation.z+= (mx*0.3 - group.rotation.z)*0.05;
+    renderer.render(scene,camera);
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+<script src="site.js"></script>
+</body>
+</html>

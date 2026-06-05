@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>API Docs — MolexAI</title>
+<meta name="description" content="REST + Python SDK for MolexAI's drug-discovery platform — target scoring, generation, ADMET, docking." />
+<meta property="og:title" content="API Docs — MolexAI" />
+<meta property="og:description" content="REST + Python SDK for MolexAI's drug-discovery platform — target scoring, generation, ADMET, docking." />
+<meta property="og:type" content="website" />
+<link rel="canonical" href="https://molexai.app/api-docs.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="page.css" />
+</head>
+<body>
+<div class="mesh-bg"></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 4 C 14 10, 18 22, 26 28" stroke="#00E5A0" stroke-width="2" stroke-linecap="round"/>
+        <path d="M26 4 C 18 10, 14 22, 6 28" stroke="#7DF9C8" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="14" cy="16" r="1.8" fill="#00E5A0"/><circle cx="18" cy="16" r="1.8" fill="#00E5A0"/>
+      </svg>
+      MolexAI
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="technology.html">Technology</a>
+      <a href="pipeline.html">Use Cases</a>
+      <a href="market.html">Market</a>
+      <a href="about.html">About</a>
+      <a href="team.html">Team</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="btn btn-primary">Request Demo</a>
+  </div>
+</nav>
+<main>
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Developers</div>
+    <h1 class="page-title">The <span class="glow-text">MolexAI API</span></h1>
+    <p class="page-sub">A clean REST + Python interface to TargetIQ, MolGen, ADMET Predict, and BindSim — all powered by NVIDIA BioNeMo on H100s.</p>
+  </div>
+</section>
+
+<section><div class="container">
+  <div class="section-head"><span class="section-label">Developer Docs</span><h2>The MolexAI API</h2></div>
+  <div class="diagram"><svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#00E5A0"/><stop offset="1" stop-color="#0066FF"/></linearGradient></defs>
+  <g font-family="Orbitron,sans-serif" font-size="13" fill="#F0F8FF" text-anchor="middle">
+    <rect x="20" y="60" width="130" height="60" rx="10" fill="rgba(0,229,160,0.08)" stroke="#00E5A0"/>
+    <text x="85" y="95">Target</text>
+    <rect x="180" y="60" width="130" height="60" rx="10" fill="rgba(0,229,160,0.08)" stroke="#00E5A0"/>
+    <text x="245" y="95">Generate</text>
+    <rect x="340" y="60" width="130" height="60" rx="10" fill="rgba(0,229,160,0.08)" stroke="#00E5A0"/>
+    <text x="405" y="95">ADMET</text>
+    <rect x="500" y="60" width="130" height="60" rx="10" fill="rgba(0,229,160,0.08)" stroke="#00E5A0"/>
+    <text x="565" y="95">Dock</text>
+    <rect x="660" y="60" width="120" height="60" rx="10" fill="url(#g1)" stroke="#7DF9C8"/>
+    <text x="720" y="95" fill="#001a12">Candidate</text>
+    <g stroke="#00E5A0" stroke-width="2" fill="none" marker-end="url(#arr)">
+      <line x1="150" y1="90" x2="180" y2="90"/>
+      <line x1="310" y1="90" x2="340" y2="90"/>
+      <line x1="470" y1="90" x2="500" y2="90"/>
+      <line x1="630" y1="90" x2="660" y2="90"/>
+    </g>
+  </g>
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#00E5A0"/></marker></defs>
+</svg></div>
+  <div class="card-grid">
+    <div class="card"><div class="icon">🧬</div><h3>POST /v1/target/score</h3><p>Score 20K+ proteins for disease relevance using ESM-2 + BioNeMo embeddings.</p></div>
+    <div class="card"><div class="icon">⚗️</div><h3>POST /v1/molgen/generate</h3><p>Generate N novel, synthesizable molecules conditioned on a binding pocket.</p></div>
+    <div class="card"><div class="icon">🧪</div><h3>POST /v1/admet/predict</h3><p>Predict absorption, toxicity, metabolism for a list of SMILES strings.</p></div>
+    <div class="card"><div class="icon">🔗</div><h3>POST /v1/bindsim/dock</h3><p>GPU-accelerated docking + free-energy via NVIDIA Parabricks.</p></div>
+    <div class="card"><div class="icon">📊</div><h3>GET /v1/runs/{id}</h3><p>Poll job status, fetch results, stream logs from any pipeline run.</p></div>
+    <div class="card"><div class="icon">🔐</div><h3>Auth</h3><p>Bearer tokens via OAuth 2.0. SOC 2-ready audit logs on every call.</p></div>
+  </div>
+  <div class="prose" style="margin-top:50px">
+    <h2>Quickstart</h2>
+    <p>Install the Python SDK and run your first generation in under five minutes.</p>
+    <div class="callout"><pre style="font-family:var(--mono);font-size:13px;color:var(--highlight);white-space:pre-wrap">pip install molexai
+
+from molexai import Client
+c = Client(api_key="sk_live_...")
+mols = c.molgen.generate(target="EGFR_L858R", n=50)
+for m in mols: print(m.smiles, m.qed, m.sa)</pre></div>
+    <h3>SDKs</h3>
+    <ul><li>Python 3.9+ (official)</li><li>TypeScript / Node (beta)</li><li>R bindings (community)</li></ul>
+    <h3>Rate limits</h3>
+    <p>Researcher: 60 req/min · Lab: 600 req/min · Enterprise: custom. All limits soft and tunable on request.</p>
+  </div>
+</div></section>
+</main>
+<footer>
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-col"><h5>Platform</h5><a href="products.html">TargetIQ</a><a href="products.html">MolGen</a><a href="products.html">ADMET Predict</a><a href="products.html">BindSim</a><a href="pricing.html">Pricing</a></div>
+      <div class="footer-col"><h5>Technology</h5><a href="technology.html">NVIDIA BioNeMo</a><a href="technology.html">AlphaFold 3</a><a href="technology.html">GPU Infrastructure</a><a href="technology.html">Federated Learning</a><a href="api-docs.html">API Docs</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="about.html">About</a><a href="team.html">Team</a><a href="roadmap.html">Roadmap</a><a href="blog.html">Blog</a><a href="careers.html">Careers</a><a href="press.html">Press</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="cookies.html">Cookie Policy</a><a href="data-processing.html">Data Processing</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 MolexAI Inc. — D No 1-1478, Rudrampeta, Anantapur, Andhra Pradesh 515004, India</div>
+      <div>hello@molexai.app · +91 97121 31662</div>
+    </div>
+  </div>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>

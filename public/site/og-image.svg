@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#020818"/>
+      <stop offset="1" stop-color="#06163a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#00E5A0" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#00E5A0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <circle cx="900" cy="315" r="320" fill="url(#glow)"/>
+  <g transform="translate(120,180)">
+    <path d="M0 0 C 80 60, 80 210, 0 270" stroke="#00E5A0" stroke-width="6" fill="none"/>
+    <path d="M80 0 C 0 60, 0 210, 80 270" stroke="#7DF9C8" stroke-width="6" fill="none"/>
+    <circle cx="14" cy="20" r="6" fill="#00E5A0"/><circle cx="66" cy="20" r="6" fill="#00E5A0"/>
+    <circle cx="40" cy="135" r="6" fill="#7DF9C8"/>
+    <circle cx="14" cy="250" r="6" fill="#00E5A0"/><circle cx="66" cy="250" r="6" fill="#00E5A0"/>
+  </g>
+  <text x="260" y="290" font-family="Orbitron,Arial,sans-serif" font-weight="800" font-size="96" fill="#F0F8FF">MolexAI</text>
+  <text x="260" y="360" font-family="Arial,sans-serif" font-weight="500" font-size="34" fill="#7DF9C8">Accelerating Human Health With AI</text>
+  <text x="260" y="420" font-family="Arial,sans-serif" font-size="24" fill="#7BA4C8">AI-Powered Drug Discovery · NVIDIA BioNeMo · H100</text>
+  <rect x="260" y="470" width="220" height="50" rx="25" fill="none" stroke="#00E5A0" stroke-width="2"/>
+  <text x="370" y="503" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="20" fill="#00E5A0">molexai.app</text>
+</svg>
