@@ -1,10 +1,5 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "robotics",
-  "main": "./dist/server/server.js",
-  "compatibility_date": "2026-06-01",
-  "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": "./dist/client"
-  }
+  "name": "my-worker",
+  "main": "src/index.js",
+  "compatibility_date": "2026-06-05"
 }
