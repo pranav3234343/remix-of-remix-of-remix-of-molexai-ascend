@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
+    "build": "rm -rf dist && mkdir -p dist/client && cp -R public/* dist/client/ && cp -R public/site/* dist/client/",
+    "build:dev": "npm run build",
+    "deploy": "npm run build && npx wrangler deploy",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
